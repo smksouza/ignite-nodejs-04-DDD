@@ -1,18 +1,18 @@
 import { InMemoryQuestionRepository } from 'test/repositories/in-memory-question-repository'
-import { DeleteQuestionUseCase } from './delete-question'
+import { EditQuestionUseCase } from './edit-question'
 import { makeQuestion } from 'test/factories/make-question'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 let inMemoryQuestionRepository: InMemoryQuestionRepository
-let sut: DeleteQuestionUseCase
+let sut: EditQuestionUseCase
 
-describe('Delete Question', () => {
+describe('Edit Question', () => {
   beforeEach(() => {
     inMemoryQuestionRepository = new InMemoryQuestionRepository()
-    sut = new DeleteQuestionUseCase(inMemoryQuestionRepository)
+    sut = new EditQuestionUseCase(inMemoryQuestionRepository)
   })
 
-  it('should be able to delete a question', async () => {
+  it('should be able to edit a question', async () => {
     const newQuestion = makeQuestion(
       { authorId: new UniqueEntityID('author-1') },
       new UniqueEntityID('question-1'),
@@ -21,14 +21,19 @@ describe('Delete Question', () => {
     await inMemoryQuestionRepository.create(newQuestion)
 
     await sut.execute({
+      questionId: newQuestion.id.toString(),
       authorId: 'author-1',
-      questionId: 'question-1',
+      title: 'Pergunta teste',
+      content: 'Conteúdo teste',
     })
 
-    expect(inMemoryQuestionRepository.items).toHaveLength(0)
+    expect(inMemoryQuestionRepository.items[0]).toMatchObject({
+      title: 'Pergunta teste',
+      content: 'Conteúdo teste',
+    })
   })
 
-  it('should not be able to delete a question from anoter user', async () => {
+  it('should not be able to edit a question from anoter user', async () => {
     const newQuestion = makeQuestion(
       { authorId: new UniqueEntityID('author-1') },
       new UniqueEntityID('question-1'),
@@ -40,8 +45,10 @@ describe('Delete Question', () => {
 
     expect(() => {
       return sut.execute({
+        questionId: newQuestion.id.toString(),
         authorId: 'author-2',
-        questionId: 'question-1',
+        title: 'Pergunta teste',
+        content: 'Conteúdo teste',
       })
     }).rejects.toBeInstanceOf(Error)
   })
