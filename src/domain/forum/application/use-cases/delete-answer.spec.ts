@@ -18,8 +18,6 @@ describe('Delete Answer', () => {
       new UniqueEntityID('answer-1'),
     )
 
-    console.log(newAnswer)
-
     await inMemoryAnswersRepository.create(newAnswer)
 
     await sut.execute({
