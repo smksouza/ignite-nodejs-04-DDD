@@ -1,4 +1,4 @@
-import { InMemoryQuestionRepository } from 'test/repositories/in-memory-question-repository'
+import { InMemoryQuestionRepository } from 'test/repositories/in-memory-questions-repository'
 import { DeleteQuestionsUseCase } from './delete-question'
 import { makeQuestion } from 'test/factories/make-question'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
