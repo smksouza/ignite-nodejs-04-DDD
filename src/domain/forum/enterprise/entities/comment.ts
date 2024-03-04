@@ -10,7 +10,7 @@ export interface CommentProps {
 
 export abstract class Comment<
   Props extends CommentProps,
-> extends Entity<CommentProps> {
+> extends Entity<Props> {
   get authorId() {
     return this.props.authorId
   }
