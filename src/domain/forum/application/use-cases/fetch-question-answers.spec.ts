@@ -6,7 +6,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let sut: FetchQuestionAnswersUseCase
 
-describe('Fetch Recent Questions', () => {
+describe('Fetch Question Answers', () => {
   beforeEach(() => {
     inMemoryAnswersRepository = new InMemoryAnswersRepository()
     sut = new FetchQuestionAnswersUseCase(inMemoryAnswersRepository)
