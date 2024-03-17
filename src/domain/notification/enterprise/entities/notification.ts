@@ -2,7 +2,7 @@ import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 
-interface NotficationProps {
+interface NotificationProps {
   recipientId: UniqueEntityID
   title: string
   content: string
@@ -10,7 +10,7 @@ interface NotficationProps {
   createdAt: Date
 }
 
-export class Notfication extends Entity<NotficationProps> {
+export class Notification extends Entity<NotificationProps> {
   get recipientId() {
     return this.props.recipientId
   }
@@ -32,10 +32,10 @@ export class Notfication extends Entity<NotficationProps> {
   }
 
   static create(
-    props: Optional<NotficationProps, 'createdAt'>,
+    props: Optional<NotificationProps, 'createdAt'>,
     id?: UniqueEntityID,
   ) {
-    const notfication = new Notfication(
+    const notification = new Notification(
       {
         ...props,
         createdAt: props.createdAt ?? new Date(),
@@ -43,6 +43,6 @@ export class Notfication extends Entity<NotficationProps> {
       id,
     )
 
-    return notfication
+    return notification
   }
 }

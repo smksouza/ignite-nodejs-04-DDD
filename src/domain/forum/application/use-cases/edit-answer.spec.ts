@@ -71,8 +71,6 @@ describe('Edit Answers', () => {
       new UniqueEntityID('answers-1'),
     )
 
-    console.log(newAnswers)
-
     await inMemoryAnswersRepository.create(newAnswers)
 
     const result = await sut.execute({
