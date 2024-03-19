@@ -8,7 +8,7 @@ export class AnswerCreatedEvent implements DomainEvent {
 
   constructor(answer: Answer) {
     this.answer = answer
-    this.accuredAt = new Date()
+    this.ocurredAt = new Date()
   }
 
   getAggregateId(): UniqueEntityID {
